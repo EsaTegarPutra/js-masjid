@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Masjid</title>
+</head>
+<body>
+    <canvas id="world" width="1000" height="500" style="border: 1px solid black;">  
+    </canvas>
+
+    <script>
+        let canvas = document.getElementById("world");
+        let ctx = canvas.getContext('2d');
+
+        function createKuba(x, y, r, color){
+            //membuat kuba
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, r, Math.PI, 2 * Math.PI);
+
+            // menutup kuba
+            ctx.moveTo(x - r, y);
+            ctx.lineTo(x + r, y);
+
+            //warna kuba
+            ctx.lineWidth = r / 10;
+            ctx.fill();
+            // ctx.stroke();
+        }
+
+        function createBangunMasjid(x, y, width, height, color){
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.lineWidth = width / 20;
+            ctx.fill();
+            // ctx.stroke();
+        }
+
+        createKuba(canvas.width / 2 - 2 * 100, canvas.height / 2 - 100, 35, "red");
+        createKuba(canvas.width / 2, canvas.height / 2, 100, "green");
+        createKuba(canvas.width / 2 + 2 * 100, canvas.height / 2 - 100, 35, "red");
+
+        //bangun masjid
+        createBangunMasjid(canvas.width / 2 + 100, canvas.height / 2, 150, 200, "brown");
+        createBangunMasjid(canvas.width / 2 - 100, canvas.height / 2, 200, 200, "yellow");
+        createBangunMasjid(canvas.width / 2 - 100 - 150, canvas.height / 2, 150, 200, "brown");
+
+        //tiang
+        createBangunMasjid(canvas.width / 2 - 2 * 100 - 35, canvas.height / 2 - 100, 2 * 35 , 100, "yellow");
+        createBangunMasjid(canvas.width / 2 + 2 * 100 - 35, canvas.height / 2 - 100, 2 * 35 , 100, "yellow");
+
+        function createDoor(x, y, width, height, color){
+            createKuba(x, canvas.height / 2 + height, width / 2, color);
+            createBangunMasjid(x - width / 2, canvas.height / 2 + height, width, height, color);
+        }
+
+        createDoor(canvas.width / 2, canvas.height / 2 + 100, 100, 100, "blue");
+        //door
+            
+    </script>
+</body>
+</html>
